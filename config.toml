@@ -1,0 +1,6 @@
+[Mysql]
+user = "api"
+pass = "j(9P%B.W"
+host = "104.198.121.136"
+port = "6666"
+db = "bookshelf"
