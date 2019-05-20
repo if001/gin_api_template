@@ -18,6 +18,7 @@ func main() {
 	fmt.Printf("[START] server. port: %s\n", addr)
 
 	r := gin.Default()
+	r.Use(gin.Recovery())
 	r.Use(middleware.SampleMiddleware())
 
 	router.Route(r, handlers)
