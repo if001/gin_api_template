@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"gin_api_template/interfaces/api/handler"
-	"gin_api_template/interfaces/api/router"
 	"gin_api_template/interfaces/api/middleware"
+	"gin_api_template/interfaces/api/router"
 )
 
 
@@ -21,7 +21,7 @@ func main() {
 	r.Use(gin.Recovery())
 	r.Use(middleware.SampleMiddleware())
 
-	router.Route(r, handlers)
+	router.Routes(r, handlers)
 	if err := r.Run(); err != nil {
 		panic(fmt.Errorf("[FAILED] start sever. err: %v", err))
 	}
