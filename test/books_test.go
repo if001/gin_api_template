@@ -19,12 +19,12 @@ type URI struct {
 func (u *URI) toString() string {
 	return u.uri
 }
-func (u *URI) withToken() *URI {
-	u.uri = u.uri + u.LinkChar() + "token=hogehoge"
+func (u *URI) withToken(token string) *URI {
+	u.uri = u.uri + u.LinkChar() + QueryString{key:"token",value:token}.String()
 	return u
 }
 func (u *URI) withQueryString(q QueryString) *URI {
-	// u.uri = u.uri + u.LinkChar() + q.String()
+	u.uri = u.uri + u.LinkChar() + q.String()
 	return u
 }
 func (u *URI) LinkChar() string {
@@ -67,7 +67,7 @@ func TestBooksRoute(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	uri := &URI{uri: "/books"}
-	uri.withToken()
+	uri.withToken("hogehoge")
 	// uri.withToken().withQueryString(QueryString{key: "name", value: "huga"}).
 	req, _ := http.NewRequest("GET", uri.toString(), nil)
 	r.ServeHTTP(w, req)
