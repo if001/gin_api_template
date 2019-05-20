@@ -7,12 +7,13 @@ import (
 )
 
 
-func Route(r *gin.Engine, h handler.ApiHandler) {
+func Routes(r *gin.Engine, h handler.ApiHandler) {
 
 	authorized := r.Group("/")
 	authorized.Use(middleware.AuthRequired)
 	{
 		authorized.GET("/books", h.GetBooks)
+		authorized.POST("/books", h.CreateBook)
 	}
 
 }
