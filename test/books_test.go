@@ -20,7 +20,8 @@ func (u *URI) toString() string {
 	return u.uri
 }
 func (u *URI) withToken(token string) *URI {
-	u.uri = u.uri + u.LinkChar() + QueryString{key:"token",value:token}.String()
+	q := &QueryString{key:"token",value:token}
+	u.uri = u.uri + u.LinkChar() + q.String()
 	return u
 }
 func (u *URI) withQueryString(q QueryString) *URI {
@@ -67,7 +68,7 @@ func TestBooksRoute(t *testing.T) {
 
 	w := httptest.NewRecorder()
 	uri := &URI{uri: "/books"}
-	uri.withToken("hogehoge")
+	uri = uri.withToken("hogehoge")
 	// uri.withToken().withQueryString(QueryString{key: "name", value: "huga"}).
 	req, _ := http.NewRequest("GET", uri.toString(), nil)
 	r.ServeHTTP(w, req)
